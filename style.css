@@ -1,0 +1,65 @@
+@-ms-viewport{
+    width: device-width;
+}
+
+@viewport{
+    width: device-width;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+.container > h1 {
+    color: #000000;
+    text-shadow: 2.5px 3px 0.5px #ff2222,
+                 5px 6px 0.5px #33ffff;
+    font-size: 5em;
+}
+
+.gamebtn {
+    width: 13em;
+    height: 200px;
+    margin: 0.5rem;
+    border-radius: 10px;
+}
+
+
+.ezbtn, .hardbtn {
+    position: relative;
+    font-size: 400%;
+    box-shadow: 3px 4px;
+    border-radius: 10px;
+
+    margin-top: 8rem;
+    padding: 3rem;
+}
+
+.restart, .back {
+    position: relative;
+}
+
+.ezbtn:hover, 
+.hardbtn:hover{
+    color: #000000;
+    animation: wiggle 0.2s alternate;
+}
+
+.hardbtn > a, 
+.ezbtn > a {
+    padding: 2rem 0 2rem 0;
+}
+
+#headline {
+    animation: wiggle .2s alternate infinite;
+}
+@keyframes wiggle{
+    0% {
+        transform: rotateZ(-1deg);
+    }
+    100% {
+        transform: rotateZ(1deg);
+    }
+}
