@@ -19,11 +19,15 @@
     font-size: 5em;
 }
 
-.gamebtn {
-    width: 13em;
+.gamebtn,
+.gamebtn:disabled {
+    width: 200px;
     height: 200px;
     margin: 0.5rem;
     border-radius: 10px;
+
+    font-size: 7rem;
+    color: rgb(0, 0, 0);
 }
 
 
