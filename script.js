@@ -1,9 +1,12 @@
 $(function() {
     var playerOne = true;
     var playField = [
-        [0,0,0],
-        [0,0,0],
-        [0,0,0]
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0]
     ];
 
     $('.gamebtn').on('click', function(){
@@ -12,20 +15,40 @@ $(function() {
 
         if(playerOne == true)
         {
-            $(this).text("X");
             playField[x][y] = 1;
+            $(this).text("X");
+            $(this).css('background-color', '#000000');
+            $(this).css('color', '#ffffff');
 
-            $(this).css('background-color', '#55ff55');
+            console.log(x, y);
+
+            dropChip();
+            checkWin();
         }
         else
         {
-            $(this).text("O");
             playField[x][y] = 2;
+            $(this).text("O");
+            $(this).css('background-color', '#ffffff');
+            $(this).css('color', '#000000');
 
-            $(this).css('background-color', '#ff5555');
+            dropChip();
+            checkWin();
         }
         playerOne = !playerOne;
         $(this).prop('disabled', true);
     });
 
+    function dropChip()
+    {
+        // check for empty columns
+        // add class .fall to element
+        // let chip be placed at the bottom
+    }
+
+    function checkWin()
+    {
+        // check possible win situations
+        // implement alpha-pruning to increase performance
+    }
 });

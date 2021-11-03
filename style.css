@@ -21,12 +21,13 @@
 
 .gamebtn,
 .gamebtn:disabled {
-    width: 200px;
-    height: 200px;
+    width: 80px;
+    height: 80px;
     margin: 0.5rem;
     border-radius: 10px;
 
-    font-size: 7rem;
+    font-size: 2.5rem;
+    border-style: none;
     color: rgb(0, 0, 0);
 }
 
@@ -54,6 +55,18 @@
 .hardbtn > a, 
 .ezbtn > a {
     padding: 2rem 0 2rem 0;
+}
+
+.fall {
+    animation: falling 1s linear;
+}
+@keyframes falling{
+    0% {
+        transform: translateY(-500px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 #headline {
