@@ -12,6 +12,16 @@
     box-sizing: border-box;
 }
 
+.empty {
+    background-color: #999999;
+}
+.next-red{
+    background-color: rgba(255, 0, 0, 0.7)
+}
+.red {
+    background-color:rgba(255, 0, 0);
+}
+
 .container > h1 {
     color: #000000;
     text-shadow: 2.5px 3px 0.5px #ff2222,
@@ -24,7 +34,7 @@
     width: 80px;
     height: 80px;
     margin: 0.5rem;
-    border-radius: 10px;
+    border-radius: 50%;
 
     font-size: 2.5rem;
     border-style: none;
@@ -57,16 +67,8 @@
     padding: 2rem 0 2rem 0;
 }
 
-.fall {
-    animation: falling 1s linear;
-}
-@keyframes falling{
-    0% {
-        transform: translateY(-500px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
+#connect-four .row{
+    background-color: grey;
 }
 
 #headline {
