@@ -15,11 +15,19 @@
 .empty {
     background-color: #999999;
 }
+
 .next-red{
-    background-color: rgba(255, 0, 0, 0.3)
+    background-color: rgba(255,0,0,0.3)
 }
 .red {
-    background-color:rgba(255, 0, 0);
+    background-color:rgba(255,0,0);
+}
+
+.next-black {
+    background-color: rgba(0,0,0,0.3);
+}
+.black {
+    background-color: rgba(0,0,0,1);
 }
 
 .container > h1 {
