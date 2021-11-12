@@ -6,16 +6,16 @@ class Connect4
         this.COLS = 7;
         this.player = 'red';
         this.selector = selector;
-        this.setupEventListeners();
+        this.eventListeners();
     } 
 
-    setupEventListeners()
+    eventListeners()
     {
         const $board = $(this.selector);
         const that = this;
 
 
-        $board.on('mouseenter', '.empty', function() 
+        $board.on('mouseenter', '.row .col .empty', function() 
         {
             const col = $(this).data('y');
             const $lastEmptyCell = findLastEmptyCell(col);
@@ -28,19 +28,20 @@ class Connect4
             $('.gamebtn').removeClass(`next-${that.player}`);
         });
 
-        $board.on('click', '.empty', function() 
+        $board.on('click', '.row .col .empty', function() 
         {
             const row = $(this).data('x');
             const col = $(this).data('y');
             const $lastEmptyCell = findLastEmptyCell(col);
-            $lastEmptyCell.removeClass(`empty ${that.player}`);
+            $lastEmptyCell.removeClass(`empty next-${that.player}`);
             $lastEmptyCell.addClass(that.player);
-            $lastEmptyCell.data("player", `${that.player}`);
+            $lastEmptyCell.attr("player", `${that.player}`);
 
-            const winner = that.checkforWinner(row,col);
+            const winner = that.checkforWinner($lastEmptyCell.data('x'), $lastEmptyCell.data('y'));
             if(winner) 
             {
-                alert(`Game Over! Player ${that.player} has Won!`);
+                $('.row .col .gamebtn').prop('disabled', true);
+                alert(`Game Over! Player ${that.player.toUpperCase()} has Won!`);
                 return;
             }
             that.player = (that.player === 'red') ? 'black' : 'red';
@@ -49,7 +50,7 @@ class Connect4
 
         function findLastEmptyCell(col)
         {
-            const cells = $(`.gamebtn[data-y='${col}']`);
+            const cells = $(`.row .col .gamebtn[data-y='${col}']`);
 
             for(let i = cells.length - 1; i >= 0; i--)
             {
@@ -59,7 +60,6 @@ class Connect4
             }
             return null;
         }
-
     }
 
     checkforWinner(row,col)
@@ -67,44 +67,56 @@ class Connect4
         const that = this;
         function checkDirection(direction)
         {
-            let total = 1;
-            let x = row + direction.i;
-            let y = col + direction.j;
-            let $nextCell = $getCell(x, y);
+            let total = 0;
+            let i = row + direction.i;
+            let j = col + direction.j;
+            let $nextCell = $getCell(i, j);
             
-            while(x >= 0 && x < that.ROWS && y >= 0 && y < that.COLS && $nextCell.data('player') === that.player)
+            while(i >= 0 && i < that.ROWS && j >= 0 && j < that.COLS && $nextCell.attr('player') === that.player)
             {
                 total++;
-                x += direction.i;
-                y += direction.j;
-                $nextCell = $getCell(x, y);
+                i += direction.i;
+                j += direction.j;
+                $nextCell = $getCell(i, j);
             }
             return total;
         }
 
         function $getCell(x, y)
         {
-            return $(`.gamebtn[data-x='${x}'] [data-y='${y}']`);
+            return $(`.row .col .gamebtn[data-x='${x}'][data-y='${y}']`);
         }
 
         function checkWin(directionX, directionY) 
         {
             const total = 1 + checkDirection(directionX) + checkDirection(directionY);
-            if(total >= 4) 
+            if(total >= 4)
             {
                 return that.player;
             }
-            else 
+            else
             {
                 return null;
             }
         }
 
-        function checkVerticals() 
+        function checkVerticals()
         {
             return checkWin({i: -1, j: 0}, {i: 1, j: 0});
         }
-
-        return checkVerticals();
+        function checkHorizontals()
+        {
+            return checkWin({i: 0, j: -1}, {i: 0, j: 1});
+        }
+        function checkDiagonalRight()
+        {
+            return checkWin({i: -1, j: 1}, {i: 1, j: -1});
+        }
+        function checkDiagonalLeft()
+        {
+            return checkWin({i: -1, j: -1}, {i: 1, j: 1});
+        }
+        
+        return checkVerticals(), checkHorizontals(), checkDiagonalRight(), checkDiagonalLeft();
     }
 }
