@@ -38,7 +38,7 @@ class Connect4
             $lastEmptyCell.attr("player", `${that.player}`);
 
             const winner = that.checkforWinner($lastEmptyCell.data('x'), $lastEmptyCell.data('y'));
-            if(winner) 
+            if(winner)
             {
                 $('.row .col .gamebtn').prop('disabled', true);
                 alert(`Game Over! Player ${that.player.toUpperCase()} has Won!`);
@@ -117,6 +117,6 @@ class Connect4
             return checkWin({i: -1, j: -1}, {i: 1, j: 1});
         }
         
-        return checkVerticals(), checkHorizontals(), checkDiagonalRight(), checkDiagonalLeft();
+        return checkVerticals() || checkHorizontals() || checkDiagonalRight() || checkDiagonalLeft();
     }
 }
