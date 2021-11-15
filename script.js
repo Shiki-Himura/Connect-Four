@@ -41,7 +41,10 @@ class Connect4
             if(winner)
             {
                 $('.row .col .gamebtn').prop('disabled', true);
-                alert(`Game Over! Player ${that.player.toUpperCase()} has Won!`);
+                $(`<div class="d-flex justify-content-center align-items-center">Game Over! Player ${that.player.toUpperCase()} has Won!</div>`)
+                .insertAfter('h1')
+                .css({ 'color': `${that.player}`,
+                       'font-size': '3em'});
                 return;
             }
             //that.player = (that.player === 'red') ? 'black' : 'red';
@@ -63,7 +66,10 @@ class Connect4
                 if(winner)
                 {
                     $('.row .col .gamebtn').prop('disabled', true);
-                    alert(`Game Over! Player ${that.player.toUpperCase()} has Won!`);
+                    $(`<div class="d-flex justify-content-center align-items-center">Game Over! Player ${that.player.toUpperCase()} has Won!</div>`)
+                    .insertAfter('h1')
+                    .css({ 'color': `${that.player}`,
+                           'font-size': '3em'});
                     return;
                 }
 
