@@ -37,16 +37,46 @@ class Connect4
             $lastEmptyCell.addClass(that.player);
             $lastEmptyCell.attr("player", `${that.player}`);
 
-            const winner = that.checkforWinner($lastEmptyCell.data('x'), $lastEmptyCell.data('y'));
+            const winner = ValidateWinner($lastEmptyCell);
             if(winner)
             {
                 $('.row .col .gamebtn').prop('disabled', true);
                 alert(`Game Over! Player ${that.player.toUpperCase()} has Won!`);
                 return;
             }
-            that.player = (that.player === 'red') ? 'black' : 'red';
+            //that.player = (that.player === 'red') ? 'black' : 'red';
+            that.player = 'black';
+
+            if(that.player === 'black')
+            {
+                // TODO: implement AI
+                const fields = document.getElementsByClassName('empty');
+                const randomField = fields[randomIndex(fields)];
+                const col = $(randomField).data('y');
+                const $lastEmptyCell = findLastEmptyCell(col);
+
+                $lastEmptyCell.removeClass(`empty next-${that.player}`);
+                $lastEmptyCell.addClass(that.player);
+                $lastEmptyCell.attr("player", `${that.player}`);
+
+                const winner = ValidateWinner($lastEmptyCell);
+                if(winner)
+                {
+                    $('.row .col .gamebtn').prop('disabled', true);
+                    alert(`Game Over! Player ${that.player.toUpperCase()} has Won!`);
+                    return;
+                }
+
+                that.player = 'red';
+            }
+
             $(this).trigger('mouseenter');
         });
+
+        function ValidateWinner($lastEmptyCell)
+        {
+            return that.checkforWinner($lastEmptyCell.data('x'), $lastEmptyCell.data('y'))
+        }
 
         function findLastEmptyCell(col)
         {
@@ -59,6 +89,11 @@ class Connect4
                     return $cell;
             }
             return null;
+        }
+
+        function randomIndex(field)
+        {
+            return Math.floor(Math.random() * field.length);
         }
     }
 
