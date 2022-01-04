@@ -52,7 +52,8 @@ class Connect4
 
             if(that.player === 'black')
             {
-                // TODO: implement AI
+                // TODO: implement AI (minmax?)
+
                 const fields = document.getElementsByClassName('empty');
                 const randomField = fields[randomIndex(fields)];
                 const col = $(randomField).data('y');
